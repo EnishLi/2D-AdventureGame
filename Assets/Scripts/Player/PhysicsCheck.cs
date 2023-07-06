@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class PhysicsCheck : MonoBehaviour
 {
-    //¼ì²â·¶Î§
+    [Header("æ£€æµ‹å‚æ•°")]
+    //æ£€æµ‹èŒƒå›´å˜é‡
     public float checkRaduis;
 
-    //¼ì²â²ã¼¶
+    //æ£€æµ‹å¯¹è±¡
     public LayerMask groundLayer;
+    public Vector2 bottomOffset;
 
-    //µØÃæÅĞ¶Ï
+    [Header("æ£€æµ‹èŒƒå›´")]
+    //æ£€æµ‹åœ°é¢å˜é‡
     public bool isGround;
 
-    //½Åµ×µÄÎ»ÒÆ²îÖµ
-    public Vector2 bottomOffset;
+    //ï¿½Åµ×µï¿½Î»ï¿½Æ²ï¿½Öµ
+    
     private void Update()
     {
         check();
@@ -23,7 +26,7 @@ public class PhysicsCheck : MonoBehaviour
 
     private void check()
     {
-        //¼ì²âµØÃæ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         isGround = Physics2D.OverlapCircle((Vector2)transform.position+bottomOffset, checkRaduis, groundLayer);
     }
     private void OnDrawGizmosSelected()

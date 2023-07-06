@@ -6,81 +6,73 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //´´½¨¸ÕÌåÀà
+    //ç‰©ä½“æ£€æµ‹çš„å˜é‡
+    private PhysicsCheck physicsCheck;
+    //åˆ›å»ºä¸€ä¸ªæ§åˆ¶å™¨å˜é‡ã€‚æ§åˆ¶æ¸¸æˆè¾“å…¥
+    public PlayerInputControl inputControl;
+    //åˆ›å»ºä¸€ä¸ª2Dåˆšä½“ç»„ä»¶
     private Rigidbody2D rb;
-    //´´½¨°´¼üÊäÈëµÄÀà
-    public PlayInputControl inputControl;
-
-    //ÎïÌåÅö×²¼ì²âÀà
-    public PhysicsCheck physicsCheck;
-    //´´½¨ÊäÈëµÄ·½Ïò
+    //åˆ›å»ºä¸€ä¸ªäºŒç»´æ–¹å‘å˜é‡
     public Vector2 inputDirection;
-    [Header("»ù±¾²ÎÊı")]
-    //´´½¨ÈËÎïÒÆ¶¯µÄËÙ¶È
+    [Header("åŸºç¡€å˜é‡")]
+    //åˆ›å»ºé€Ÿåº¦å˜é‡
     public float speed;
-
-    //ÌøÔ¾Á¦
+    //åˆ›å»ºä¸€ä¸ªåŠ›çš„å˜é‡
     public float jumpForce;
+    private void Awake() {
+        //è·å–åˆšä½“çš„ç»„ä»¶
+        rb=GetComponent<Rigidbody2D>();
+        //åˆ›å»ºç©å®¶è¾“å…¥çš„ç±»
+        inputControl =new PlayerInputControl();
+        //æŒ‚è½½ä¸€ä¸ªè·³è·ƒå‡½æ•°
+        inputControl.Gameplay.Jump.started += Jump;
+        //è·å–ç‰©ä½“æ£€æµ‹çš„ç»„ä»¶
+        physicsCheck=GetComponent<PhysicsCheck>();
+        
+    }
 
-
-
-    private void Awake()
+    //è·³è·ƒå‡½æ•°
+    private void Jump(InputAction.CallbackContext context)
     {
-        //´´½¨ÊäÈëµÄÊµÌåÀà
-        inputControl = new PlayInputControl();
-        //»ñÈ¡¸ÕÌå×é¼ş
-        rb = GetComponent<Rigidbody2D>();
-
-        //»ñÈ¡ÎïÀíÅö×²×é¼ş
-        physicsCheck = GetComponent<PhysicsCheck>();
-
-        //¹ØÁªº¯Êı½«Jump°´¼ü¹ØÁªµ½Jumpº¯Êı
-        inputControl.GamePlay.Jump.started += Jump;
+        if(physicsCheck.isGround)
+        {
+            //å‘ä¸Šæ–¹æ–½åŠ ä¸€ä¸ªç¬æ—¶åŠ›
+            rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
+        }
     }
 
     private void OnEnable()
     {
-        //ÊäÈëÊµÌåÀàµÄ¿ªÊ¼
         inputControl.Enable();
     }
+
     private void OnDisable()
     {
-        //ÊäÈëÊµÌåÀàµÄ½áÊø
         inputControl.Disable();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //»ñÈ¡°´¼üµÄÊäÈë·½Ïò
-        inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
-    }
-    private void FixedUpdate()
-    {
-        Move();
-    }
 
-    public void Move()
+    private void Update()
     {
-        //ÈËÎïÒÆ¶¯
-        rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
-        //ÈËÎï·­×ª
-        int faceDir = (int)transform.localScale.x;
-        if (inputDirection.x > 0)
-            faceDir = 1;
-        if (inputDirection.x < 0)
-            faceDir = -1;
-        transform.localScale = new Vector3(faceDir, 1, 1);
-
+        //è·å–ç§»åŠ¨çš„å€¼
+        inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
     }
-    //ÌøÔ¾µÄ·½·¨
-    private void Jump(InputAction.CallbackContext context)
+    private void FixedUpdate() {
+       
+        
+        move(); 
+    }
+    //äººç‰©ç§»åŠ¨å‡½æ•°
+    private void move()
     {
-        //Debug.Log("Jump");
-        //Ê©¼ÓÒ»¸öÌøÔ¾µÄÁ¦
-        //¶ÔÌøÔ¾½øĞĞÏŞÖÆ
-        if(physicsCheck.isGround)
-            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
+        //äººç‰©ç§»åŠ¨
+        rb.velocity=new Vector2(inputDirection.x*speed*Time.deltaTime,rb.velocity.y);
+        //äººç‰©ç¿»è½¬
+        int faceDir=(int)transform.localScale.x;
+        if(inputDirection.x>0)
+            faceDir=1;
+        if(inputDirection.x<0)
+            faceDir=-1;
+        transform.localScale=new Vector3(faceDir,1,1);
     }
 }
