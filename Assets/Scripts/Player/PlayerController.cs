@@ -15,19 +15,38 @@ public class PlayerController : MonoBehaviour
     //创建一个二维方向变量
     public Vector2 inputDirection;
     [Header("基础变量")]
+    //创建一个奔跑速度
+    private float runSpeed;
+    //创建一个走路的速度
+    private float walkSpeed => speed/2.5f;
     //创建速度变量
     public float speed;
     //创建一个力的变量
     public float jumpForce;
     private void Awake() {
+        runSpeed=speed;
         //获取刚体的组件
         rb=GetComponent<Rigidbody2D>();
         //创建玩家输入的类
         inputControl =new PlayerInputControl();
         //挂载一个跳跃函数
         inputControl.Gameplay.Jump.started += Jump;
+        #region 强制走路
+        inputControl.Gameplay.Walk.performed += ctx => 
+        {
+            if(physicsCheck.isGround)
+                speed=walkSpeed;
+        };
+        inputControl.Gameplay.Walk.canceled+=ctx=>
+        {
+            if(physicsCheck.isGround)
+                speed=runSpeed;
+        };
+        #endregion
         //获取物体检测的组件
         physicsCheck=GetComponent<PhysicsCheck>();
+
+        
         
     }
 
@@ -58,8 +77,6 @@ public class PlayerController : MonoBehaviour
         inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
     }
     private void FixedUpdate() {
-       
-        
         move(); 
     }
     //人物移动函数
