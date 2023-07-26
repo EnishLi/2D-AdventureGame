@@ -16,8 +16,9 @@ public class PhysicsCheck : MonoBehaviour
     [Header("检测范围")]
     //检测地面变量
     public bool isGround;
+    
 
-    //�ŵ׵�λ�Ʋ�ֵ
+    //经行地面检查函数
     
     private void Update()
     {
