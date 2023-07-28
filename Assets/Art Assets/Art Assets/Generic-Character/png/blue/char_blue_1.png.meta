@@ -106,6 +106,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -572,7 +585,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_22
+      name: Jump-1-1
       rect:
         serializedVersion: 2
         x: 0
@@ -593,7 +606,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_23
+      name: Jump-1-2
       rect:
         serializedVersion: 2
         x: 56
@@ -614,7 +627,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_24
+      name: Jump-2-1
       rect:
         serializedVersion: 2
         x: 112
@@ -635,7 +648,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_25
+      name: Jump-2-2
       rect:
         serializedVersion: 2
         x: 168
@@ -656,7 +669,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_26
+      name: Jump-2-3
       rect:
         serializedVersion: 2
         x: 224
@@ -677,11 +690,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_27
+      name: Jump-2-4
       rect:
         serializedVersion: 2
         x: 280
-        y: 392
+        y: 393
         width: 56
         height: 56
       alignment: 7
@@ -698,11 +711,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_28
+      name: Jump-3-1
       rect:
         serializedVersion: 2
         x: 336
-        y: 392
+        y: 393
         width: 56
         height: 56
       alignment: 7
@@ -719,7 +732,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_29
+      name: Jump-3-2
       rect:
         serializedVersion: 2
         x: 392
@@ -740,7 +753,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_30
+      name: Jump-3-3
       rect:
         serializedVersion: 2
         x: 0
@@ -761,7 +774,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_31
+      name: Jump-4-1
       rect:
         serializedVersion: 2
         x: 56
@@ -782,7 +795,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_32
+      name: Jump-4-2
       rect:
         serializedVersion: 2
         x: 112
@@ -803,7 +816,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_33
+      name: Jump-4-3
       rect:
         serializedVersion: 2
         x: 168
@@ -824,7 +837,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_34
+      name: Jump-4-4
       rect:
         serializedVersion: 2
         x: 224
@@ -845,10 +858,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_35
+      name: Jump-5-1
       rect:
         serializedVersion: 2
-        x: 280
+        x: 281
         y: 336
         width: 56
         height: 56
@@ -866,11 +879,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_36
+      name: Jump-5-2
       rect:
         serializedVersion: 2
         x: 336
-        y: 336
+        y: 337
         width: 56
         height: 56
       alignment: 7
@@ -887,7 +900,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_1_37
+      name: Jump-5-3
       rect:
         serializedVersion: 2
         x: 392
@@ -1548,6 +1561,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Jump-1-1: -464981473
+      Jump-1-2: 2067711120
+      Jump-2-1: -1142840057
+      Jump-2-2: 351540083
+      Jump-2-3: -1310328545
+      Jump-2-4: 1606258334
+      Jump-3-1: -588554287
+      Jump-3-2: -1520042146
+      Jump-3-3: 1625828740
+      Jump-4-1: 1037016193
+      Jump-4-2: -1266356487
+      Jump-4-3: 1017339195
+      Jump-4-4: -115650672
+      Jump-5-1: -1681746649
+      Jump-5-2: -248974783
+      Jump-5-3: 593901793
       char_blue_1_0: -783182301
       char_blue_1_1: 917025602
       char_blue_1_10: -691428085
@@ -1563,23 +1592,7 @@ TextureImporter:
       char_blue_1_2: -1586868827
       char_blue_1_20: -1974951808
       char_blue_1_21: 1972614862
-      char_blue_1_22: -464981473
-      char_blue_1_23: 2067711120
-      char_blue_1_24: -1142840057
-      char_blue_1_25: 351540083
-      char_blue_1_26: -1310328545
-      char_blue_1_27: 1606258334
-      char_blue_1_28: -588554287
-      char_blue_1_29: -1520042146
       char_blue_1_3: -178339831
-      char_blue_1_30: 1625828740
-      char_blue_1_31: 1037016193
-      char_blue_1_32: -1266356487
-      char_blue_1_33: 1017339195
-      char_blue_1_34: -115650672
-      char_blue_1_35: -248974783
-      char_blue_1_36: -1681746649
-      char_blue_1_37: 593901793
       char_blue_1_38: -523047982
       char_blue_1_39: 1958074744
       char_blue_1_4: 65142876
