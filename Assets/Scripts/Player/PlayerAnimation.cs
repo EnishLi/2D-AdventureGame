@@ -10,6 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     //创建动画变量
     public Animator anim;
     private PhysicsCheck physicsCheck;
+    private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class PlayerAnimation : MonoBehaviour
         anim=GetComponent<Animator>();
         //获取地面检测脚本组件
         physicsCheck=GetComponent<PhysicsCheck>();
+        playerController=GetComponent<PlayerController>();
 
     }
 
@@ -32,5 +34,6 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("velocityX",Mathf.Abs(rb.velocity.x));
         anim.SetFloat("velocityY",rb.velocity.y);
         anim.SetBool("isGround",physicsCheck.isGround);
+        anim.SetBool("isGrouch",playerController.isGrouch);
     }
 }
