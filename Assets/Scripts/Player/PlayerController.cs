@@ -84,6 +84,11 @@ public class PlayerController : MonoBehaviour
     {
         inputControl.Disable();
     }
+   /* //测试
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log(collision.name);
+    }*/
 
 
     private void Update()
@@ -111,7 +116,7 @@ public class PlayerController : MonoBehaviour
             faceDir=-1;
         transform.localScale=new Vector3(faceDir,1,1);
         //下蹲
-        isGrouch=inputDirection.y<-0.1f && physicsCheck.isGround; 
+        isGrouch=inputDirection.y<-0.01f && physicsCheck.isGround; 
         if(isGrouch)
         {
             //修改碰撞体大小和位移

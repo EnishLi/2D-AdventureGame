@@ -32,6 +32,7 @@ public class PhysicsCheck : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset,checkRaduis);
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset,checkRaduis); 
+        
     }
 }

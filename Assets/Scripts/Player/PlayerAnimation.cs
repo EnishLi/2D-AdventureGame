@@ -36,4 +36,8 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isGround",physicsCheck.isGround);
         anim.SetBool("isGrouch",playerController.isGrouch);
     }
+    public void PlayHurt()
+    {
+        anim.SetTrigger("hurt");
+    }
 }
