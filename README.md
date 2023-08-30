@@ -1,4 +1,4 @@
-# 2DAdvebtureGame
+# 2DAdventureGame
 
 #### 介绍
 一款2D横版RPG游戏，学习于Unity中文课堂的麦扣老师
