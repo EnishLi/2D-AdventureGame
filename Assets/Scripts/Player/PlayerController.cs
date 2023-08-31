@@ -6,30 +6,63 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //获取胶囊碰撞体组件
+    //创建胶囊碰撞体组件变量
     private CapsuleCollider2D coll;
-    //物体检测的变量
+
+    //创建物体检测的变量
     private PhysicsCheck physicsCheck;
+
     //创建一个控制器变量。控制游戏输入
     public PlayerInputControl inputControl;
-    //创建一个2D刚体组件
+
+    //创建一个2D刚体组件变量
     private Rigidbody2D rb;
+
+    //创建动画组件变量
+    private PlayerAnimation playerAnimation;
+
     //创建一个二维方向变量
     public Vector2 inputDirection;
+
     [Header("基础变量")]
+
     //创建一个奔跑速度
     private float runSpeed;
+
     //创建一个走路的速度
     private float walkSpeed => speed/2.5f;
+    
     //创建速度变量
     public float speed;
+    
     //创建一个力的变量
     public float jumpForce;
+   
+    //人物范围
     private Vector2 originalOffset;
     private Vector2 originalSize;
 
-    //创建下蹲判断变量
-    public bool isGrouch; 
+    //伤害作用力的变量
+    public float hurtForce;
+
+    [Header("材质")]
+    public PhysicsMaterial2D normal;
+
+    public PhysicsMaterial2D wall;
+
+    [Header("状态")]
+    //创建下蹲状态
+    public bool isGrouch;
+
+    //玩家受伤状态
+    public bool isHurt;
+
+    //玩家状态
+    public bool isDead;
+
+    //攻击状态
+    public bool isAttack;
+
     private void Awake() {
 
         runSpeed=speed;
@@ -42,6 +75,8 @@ public class PlayerController : MonoBehaviour
         originalOffset=coll.offset;
         originalSize=coll.size;
 
+        //获取角色动画组件
+        playerAnimation=GetComponent<PlayerAnimation>();
 
         //创建玩家输入的类
         inputControl =new PlayerInputControl();
@@ -60,10 +95,15 @@ public class PlayerController : MonoBehaviour
                 speed=runSpeed;
         };
         #endregion
-        
-        
-        
+
+        // 攻击
+        inputControl.Gameplay.Attack.started += PlayerAttack;
+
+
+
     }
+
+    
 
     //跳跃函数
     private void Jump(InputAction.CallbackContext context)
@@ -95,9 +135,11 @@ public class PlayerController : MonoBehaviour
     {
         //获取移动的值
         inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
+        CheckState();
     }
     private void FixedUpdate() {
-        move(); 
+        if(!isHurt && !isAttack)
+            move(); 
     }
     //人物移动函数
     private void move()
@@ -131,4 +173,33 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    //攻击的方法
+    private void PlayerAttack(InputAction.CallbackContext context)
+    {
+        playerAnimation.PlayAttack();
+        isAttack = true;
+    }
+    //材质切换
+    private void CheckState()
+    {
+        coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
+        
+        gameObject.layer = isDead ? LayerMask.NameToLayer("Enemy") : LayerMask.NameToLayer("Player");
+
+    }
+    #region unity事件
+    public void GetHurt(Transform attacker)
+    { 
+        isHurt = true;
+        rb.velocity = Vector2.zero;
+        Vector2 dir = new Vector2((transform.position.x - attacker.position.x),0).normalized;
+        rb.AddForce(dir*hurtForce,ForceMode2D.Impulse);
+    }
+    public void PlayerDead()
+    { 
+        isDead = true;
+        inputControl.Gameplay.Disable();
+    }
+    
+    #endregion
 }

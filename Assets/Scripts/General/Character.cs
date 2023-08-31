@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     //当前生命值
     public float currentHealth;
 
-    [Header("无敌时间")]
+    [Header("受伤无敌")]
     //无敌时间
     public float invulnerableDuration;
 
@@ -21,7 +21,11 @@ public class Character : MonoBehaviour
     //无敌
     public bool invulnerable;
 
+    //伤害事件
     public UnityEvent<Transform> OnTakedamage;
+
+    //死亡事件
+    public UnityEvent OnDie;
 
     private void Start()
     {
@@ -39,9 +43,17 @@ public class Character : MonoBehaviour
             }
         }
     }
-
-    //收到伤害
-    public void TakeDamage(Attack attacker) 
+    //触发无敌帧
+    private void TriggerInvulnerable() 
+    {
+        if (!invulnerable)
+        {
+            invulnerable = true;
+            invulnerableCounter = invulnerableDuration ;
+        }
+    }
+    //受到伤害
+    public void TakeDamage(Attack attacker)
     {
         //Debug.Log(attacker.damage);
         if (invulnerable)
@@ -53,21 +65,12 @@ public class Character : MonoBehaviour
             //执行受伤
             OnTakedamage?.Invoke(attacker.transform);
         }
-        else 
+        else
         {
             currentHealth = 0;
             //触发死亡
+            OnDie?.Invoke();
         }
-        
-    }
 
-    //触发无敌帧
-    private void TriggerInvulnerable() 
-    {
-        if (!invulnerable)
-        {
-            invulnerable = true;
-            invulnerableCounter = invulnerableDuration ;
-        }
     }
 }
