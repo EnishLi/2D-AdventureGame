@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(PhysicsCheck))]
 public class Enemy : MonoBehaviour
 {
     //¸ÕÌå
@@ -32,12 +33,31 @@ public class Enemy : MonoBehaviour
 
     //¹¥»÷Õß
     public Transform attcker;
+    [Header("¼ì²â")]
+
+    //¼ì²â·¶Î§
+    public Vector2 centerOffset;
+
+    //¼ì²â³ß´ç
+    public Vector2 checkSize;
+
+    //¼ì²â¾àÀë
+    public float checkDistance;
     [Header("¼ÆÊ±Æ÷")]
     //µÈºòÊ±¼ä
     public float waitTime;
 
     //µÈ´ý¼ÆÊ±Æ÷
     public float waitTimeCounter;
+
+    //¼ì²âÍ¼²ã
+    public LayerMask attackLayer;
+
+    //¶ªÊ§Ê±¼ä
+    public float lostTime;
+
+    //¶ªÊ§¼ÆÊýÆ÷
+    public float lostTimeCounter;
 
     [Header("×´Ì¬")]
 
@@ -120,7 +140,32 @@ public class Enemy : MonoBehaviour
                 transform.localScale = new Vector3(faceDir.x, 1, 1);
             }
         }
+        if (!FoundPlayer()&& lostTimeCounter>0)
+        {
+            lostTimeCounter -= Time.deltaTime;
+        }
+        else if (FoundPlayer()) 
+        {
+            lostTimeCounter = lostTime;
+        }
     }
+    public bool FoundPlayer()
+    {
+        return Physics2D.BoxCast(transform.position+(Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
+    }
+    public void SwitchState(NpcState state)
+    {
+        var newState = state switch
+        {
+            NpcState.Patrol => patrolState,
+            NpcState.Chase => chaseState,
+            _ => null
+        };
+        currentState.OnExit();
+        currentState = newState;
+        currentState.onEnter(this);
+    }
+    #region ÊÂ¼þ
     public void OnTakeDamage(Transform attackTrans)
     {
         attcker = attackTrans;
@@ -136,6 +181,7 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Hurt");
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x,0).normalized;
         rb.AddForce(dir*hurtForce,ForceMode2D.Impulse);
+        rb.velocity = new Vector2(0,rb.velocity.y);
 
         //Æô¶¯Ð­³Ì
         StartCoroutine(OnHurt(dir));
@@ -166,5 +212,10 @@ public class Enemy : MonoBehaviour
     public void DestroyAfterAnimation()
     {
         Destroy(this.gameObject);
+    }
+    #endregion
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset + new Vector3(checkDistance*-transform.localScale.x,0), 0.2f);
     }
 }
