@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     public float invulnerableDuration;
 
     //计时器
-    private float invulnerableCounter;
+    public float invulnerableCounter;
 
     //无敌
     public bool invulnerable;
@@ -43,7 +43,9 @@ public class Character : MonoBehaviour
             }
         }
     }
-    //触发无敌帧
+    /// <summary>
+    /// 触发无敌帧
+    /// </summary>
     private void TriggerInvulnerable() 
     {
         if (!invulnerable)
@@ -52,7 +54,10 @@ public class Character : MonoBehaviour
             invulnerableCounter = invulnerableDuration ;
         }
     }
-    //受到伤害
+    /// <summary>
+    /// 受到伤害
+    /// </summary>
+    /// <param name="attacker"></param>
     public void TakeDamage(Attack attacker)
     {
         //Debug.Log(attacker.damage);

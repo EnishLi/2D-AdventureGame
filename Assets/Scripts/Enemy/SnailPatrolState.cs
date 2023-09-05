@@ -8,10 +8,6 @@ public class SnailPatrolState : BaseState
     }
     public override void Logicupdate()
     {
-        
-    }
-    public override void PhysicsUpdate()
-    {
         if (currentEnemy.FoundPlayer())
         {
             currentEnemy.SwitchState(NpcState.Skill);
@@ -25,6 +21,10 @@ public class SnailPatrolState : BaseState
         {
             currentEnemy.animator.SetBool("Walk", true);
         }
+    }
+    public override void PhysicsUpdate()
+    {
+        
     }
     public override void OnExit()
     {

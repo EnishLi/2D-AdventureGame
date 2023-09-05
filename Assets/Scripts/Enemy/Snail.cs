@@ -7,7 +7,7 @@ public class Snail : Enemy
     protected override void Awake()
     {
         base.Awake();
-        patrolState = new BoarPatrolState();
-       
+        patrolState = new SnailPatrolState();
+        skillState = new SnailSkillState();
     }
 }

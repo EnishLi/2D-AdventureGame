@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //刚体
-    protected Rigidbody2D rb;
+    [HideInInspector]public Rigidbody2D rb;
 
     //动画
     [HideInInspector]public Animator animator;
@@ -33,6 +33,10 @@ public class Enemy : MonoBehaviour
 
     //攻击者
     public Transform attcker;
+
+    //位置
+    public Vector3 spawnPoint;
+
     [Header("检测")]
 
     //检测范围
@@ -79,6 +83,9 @@ public class Enemy : MonoBehaviour
     //冲锋状态
     protected BaseState chaseState;
 
+    //技能状态
+    protected BaseState skillState;
+
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
@@ -86,6 +93,7 @@ public class Enemy : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
+        spawnPoint = transform.position;
 
     }
     private void OnEnable()
@@ -103,12 +111,9 @@ public class Enemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
-
-        if(!isHurt && !isDead && !wait)
-            Move();
-        
         currentState.PhysicsUpdate();
+        if (!isHurt && !isDead && !wait)
+            Move();      
     }
     private void OnDisable()
     {
@@ -120,8 +125,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public virtual void  Move()
     {
-
-        rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
+        //优化蜗牛的移动
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("PreMove") && !animator.GetCurrentAnimatorStateInfo(0).IsName("SnailHideRecover"))
+            rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
     }
 
    /// <summary>
@@ -149,23 +155,44 @@ public class Enemy : MonoBehaviour
             lostTimeCounter = lostTime;
         }
     }
-    public bool FoundPlayer()
+    /// <summary>
+    /// 发现敌人
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool FoundPlayer()
     {
         return Physics2D.BoxCast(transform.position+(Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
     }
+    /// <summary>
+    /// 切换状态
+    /// </summary>
+    /// <param name="state"></param>
     public void SwitchState(NpcState state)
     {
         var newState = state switch
         {
             NpcState.Patrol => patrolState,
             NpcState.Chase => chaseState,
+            NpcState.Skill => skillState,
             _ => null
         };
         currentState.OnExit();
         currentState = newState;
         currentState.onEnter(this);
     }
+    /// <summary>
+    /// 更新自己位置
+    /// </summary>
+    /// <returns></returns>
+    public virtual Vector3 GetNewPoint()
+    { 
+        return transform.position;
+    }
     #region 事件
+    /// <summary>
+    /// 受到攻击被击退
+    /// </summary>
+    /// <param name="attackTrans"></param>
     public void OnTakeDamage(Transform attackTrans)
     {
         attcker = attackTrans;
@@ -214,7 +241,7 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
     #endregion
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset + new Vector3(checkDistance*-transform.localScale.x,0), 0.2f);
     }
