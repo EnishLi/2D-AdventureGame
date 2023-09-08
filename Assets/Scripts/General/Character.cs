@@ -11,7 +11,16 @@ public class Character : MonoBehaviour
     //当前生命值
     public float currentHealth;
 
-    [Header("受伤无敌")]
+    //最大耐力值
+    public float maxPower;
+
+    //当前耐力值
+    public float currentPower;
+
+    //耐力回复速度
+    public float powerRecoverSpeed;
+
+    [Header("状态")]
     //无敌时间
     public float invulnerableDuration;
 
@@ -27,9 +36,14 @@ public class Character : MonoBehaviour
     //死亡事件
     public UnityEvent OnDie;
 
+    //生命UI变化事件
+    public UnityEvent<Character> OnHealthChange;
+
     private void Start()
     {
         currentHealth = maxHealth;
+        currentPower = maxPower;
+        OnHealthChange?.Invoke(this);
     }
 
     private void Update()
@@ -42,6 +56,8 @@ public class Character : MonoBehaviour
                 invulnerable = false;
             }
         }
+        if (currentPower < maxPower)
+            currentPower += Time.deltaTime * powerRecoverSpeed;
     }
     /// <summary>
     /// 触发无敌帧
@@ -76,6 +92,12 @@ public class Character : MonoBehaviour
             //触发死亡
             OnDie?.Invoke();
         }
+        OnHealthChange?.Invoke(this);
 
+    }
+    public void Onslide(int cost)
+    {
+        currentPower -= cost;
+        OnHealthChange?.Invoke(this);
     }
 }
