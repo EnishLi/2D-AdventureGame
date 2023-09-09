@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         currentSpeed = normalSpeed;
-        waitTimeCounter = waitTime;
+        //waitTimeCounter = waitTime;
         spawnPoint = transform.position;
 
     }
