@@ -59,6 +59,11 @@ public class Character : MonoBehaviour
         if (currentPower < maxPower)
             currentPower += Time.deltaTime * powerRecoverSpeed;
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        
+    }
     /// <summary>
     /// ´¥·¢ÎÞµÐÖ¡
     /// </summary>

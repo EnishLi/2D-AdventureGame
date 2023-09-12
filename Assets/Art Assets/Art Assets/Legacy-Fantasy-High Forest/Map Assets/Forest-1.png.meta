@@ -6396,7 +6396,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_296
+      name: water_1
       rect:
         serializedVersion: 2
         x: 0
@@ -6417,7 +6417,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_297
+      name: water_2
       rect:
         serializedVersion: 2
         x: 16
@@ -6438,7 +6438,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_298
+      name: water_3
       rect:
         serializedVersion: 2
         x: 32
@@ -6921,7 +6921,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_321
+      name: water_4
       rect:
         serializedVersion: 2
         x: 0
@@ -6942,7 +6942,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_322
+      name: water_5
       rect:
         serializedVersion: 2
         x: 16
@@ -6963,7 +6963,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_323
+      name: water_6
       rect:
         serializedVersion: 2
         x: 32
@@ -7551,7 +7551,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_351
+      name: water_7
       rect:
         serializedVersion: 2
         x: 0
@@ -7572,7 +7572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_352
+      name: water_8
       rect:
         serializedVersion: 2
         x: 16
@@ -7593,7 +7593,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_353
+      name: water_9
       rect:
         serializedVersion: 2
         x: 32
@@ -8097,7 +8097,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_377
+      name: water_10
       rect:
         serializedVersion: 2
         x: 0
@@ -8118,7 +8118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_378
+      name: water_11
       rect:
         serializedVersion: 2
         x: 16
@@ -8139,7 +8139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_379
+      name: water_12
       rect:
         serializedVersion: 2
         x: 32
@@ -11030,9 +11030,6 @@ TextureImporter:
       Forest-1_293: -583351304
       Forest-1_294: 750410029
       Forest-1_295: 673693274
-      Forest-1_296: 1027561107
-      Forest-1_297: -918576872
-      Forest-1_298: -1567052319
       Forest-1_3: 1329813327
       Forest-1_30: -60198053
       Forest-1_302: -1772505675
@@ -11056,9 +11053,6 @@ TextureImporter:
       Forest-1_319: 706630459
       Forest-1_32: 1941755046
       Forest-1_320: -587682533
-      Forest-1_321: -709793285
-      Forest-1_322: 450723337
-      Forest-1_323: -599359130
       Forest-1_327: 1711882819
       Forest-1_328: 1108647352
       Forest-1_329: 1536750921
@@ -11086,9 +11080,6 @@ TextureImporter:
       Forest-1_349: 1910390952
       Forest-1_35: -1650969103
       Forest-1_350: 959382391
-      Forest-1_351: -1099970531
-      Forest-1_352: 1184018100
-      Forest-1_353: 1392375459
       Forest-1_357: 1942770914
       Forest-1_358: -532028064
       Forest-1_359: -1927949957
@@ -11111,9 +11102,6 @@ TextureImporter:
       Forest-1_374: 1489794097
       Forest-1_375: 807074837
       Forest-1_376: 3070319
-      Forest-1_377: 375588794
-      Forest-1_378: -840074889
-      Forest-1_379: -1217326214
       Forest-1_38: -1157163460
       Forest-1_383: 1886721475
       Forest-1_384: 411927573
@@ -11344,6 +11332,18 @@ TextureImporter:
       WaterFall1-7: -1651544744
       WaterFall1-8: 1824145469
       WaterFall1-9: -683604644
+      water_1: 1027561107
+      water_10: 375588794
+      water_11: -840074889
+      water_12: -1217326214
+      water_2: -918576872
+      water_3: -1567052319
+      water_4: -709793285
+      water_5: 450723337
+      water_6: -599359130
+      water_7: -1099970531
+      water_8: 1184018100
+      water_9: 1392375459
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
