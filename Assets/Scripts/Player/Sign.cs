@@ -52,6 +52,10 @@ public class Sign : MonoBehaviour
         InputSystem.onActionChange += OnActionChange;
         playerInputControl.Gameplay.Confirm.started += OnConfirm;
     }
+    private void OnDisable()
+    {
+        canPress = false;
+    }
     /// <summary>
     /// 交互的实现
     /// </summary>

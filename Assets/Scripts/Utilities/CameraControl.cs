@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+
+    [Header("时间监听")]
+    public VoidEventSO afterSceneLoadedEvent;
     private CinemachineConfiner2D confiner2D;
     public CinemachineImpulseSource impulseSource;
 
@@ -18,10 +21,17 @@ public class CameraControl : MonoBehaviour
     private void OnEnable()
     {
         camerShakeEvent.OnEventRaised += OnCamerShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
     }
     private void OnDisable()
     {
         camerShakeEvent.OnEventRaised -= OnCamerShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised = OnAfterSceneLoadedEvent;
+    }
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        GetNewCamerBounds();
     }
 
     private void OnCamerShakeEvent()
@@ -32,10 +42,10 @@ public class CameraControl : MonoBehaviour
     /// <summary>
     /// 场景切换之后更改
     /// </summary>
-    private void Start()
+    /*private void Start()
     {
         GetNewCamerBounds();
-    }
+    }*/
     private void GetNewCamerBounds()
     {
         var obj = GameObject.FindGameObjectWithTag("Bounds");

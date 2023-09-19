@@ -7249,7 +7249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4800d2e62a9123d4c87917c2d6cc2d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionToGo: {x: 0, y: 0, z: 0}
+  positionToGo: {x: -6.3149414, y: -0.9999729, z: 0}
   sceneToGo: {fileID: 11400000, guid: 8af2cbc8ef9cba849a400c964c1e12da, type: 2}
   loadEventSO: {fileID: 11400000, guid: c4b637365a9e9d043b3684cd132a437e, type: 2}
 --- !u!61 &1566364421
@@ -21044,7 +21044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6746450641998538707, guid: 0d69c2763646c9a43bc1e8149ab706e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.25
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 6746450641998538707, guid: 0d69c2763646c9a43bc1e8149ab706e3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21097,11 +21097,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4485271200898408553, guid: eefe672083b24c24eae0e6790602db1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.55
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4485271200898408553, guid: eefe672083b24c24eae0e6790602db1a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.17
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 4485271200898408553, guid: eefe672083b24c24eae0e6790602db1a, type: 3}
       propertyPath: m_LocalPosition.z
