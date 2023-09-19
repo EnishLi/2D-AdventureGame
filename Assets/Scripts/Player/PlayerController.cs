@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
         {
             //向上方施加一个瞬时力
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            GetComponent<AudioDefination>()?.PlayAudioClip();
 
             //打断滑铲协程
             isSlide = false;

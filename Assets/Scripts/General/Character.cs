@@ -62,7 +62,13 @@ public class Character : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Water"))
+        {
+            //À¿Õˆ
+            currentHealth = 0;
+            OnHealthChange?.Invoke(this);
+            OnDie?.Invoke();
+        }
     }
     /// <summary>
     /// ¥•∑¢Œﬁµ–÷°
