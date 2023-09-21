@@ -82,6 +82,10 @@ public class PlayerController : MonoBehaviour
     //滑铲状态
     public bool isSlide;
 
+    [Header("事件监听")]
+    public SceneLoadEventSO loadEvent;
+    public VoidEventSO afterSceneLoadEvent;
+
     private void Awake() {
 
         runSpeed=speed;
@@ -182,13 +186,27 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputControl.Enable();
+        loadEvent.LoadREquestEvent += OnLodeEvent;
+        afterSceneLoadEvent.OnEventRaised += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         inputControl.Disable();
+        loadEvent.LoadREquestEvent -= OnLodeEvent;
+        afterSceneLoadEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
     }
-  
+    //场景加载停止控制
+    private void OnLodeEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
+    {
+        inputControl.Gameplay.Disable();
+    }
+    //场景加载结束启动控制
+    private void OnAfterSceneLoadedEvent()
+    {
+        inputControl.Gameplay.Enable();
+    }
+
 
 
     private void Update()

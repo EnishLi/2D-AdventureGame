@@ -11,14 +11,22 @@ public class SceneLoader : MonoBehaviour
 {
     public Transform playerTrans;
 
+    //判断场景加载状态
     public bool isLoading;
 
+    //角色的位置
     public Vector3 firstPosition;
 
+    //角色场景加载的位置
     private Vector3 positionToGo;
+
+    //场景渐变的状态
     private bool fadeScreen;
+
+    //场景渐变等待的时间
     public float fadeDuration;
-    [Header("时间监听")]
+
+    [Header("事件监听")]
 
     public SceneLoadEventSO loadEventSO;
     public GameSceneSO firstLoadScene;
@@ -38,6 +46,7 @@ public class SceneLoader : MonoBehaviour
     private void OnEnable()
     {
         loadEventSO.LoadREquestEvent += OnLoadRequestEvent;
+        
     }
     private void OnDisable()
     {
@@ -86,7 +95,8 @@ public class SceneLoader : MonoBehaviour
     private void NewGame()
     {
         sceneToLoad = firstLoadScene;
-        OnLoadRequestEvent(sceneToLoad,firstPosition,true);
+        //OnLoadRequestEvent(sceneToLoad,firstPosition,true);
+        loadEventSO.RaiseLoadRequestEvent(sceneToLoad,firstPosition,true);
     }
     private void LoadNewScene()
     {
@@ -111,6 +121,7 @@ public class SceneLoader : MonoBehaviour
         playerTrans.gameObject.SetActive(true);
         isLoading = false;
         //场景加载完
-        AfterSceneEvent.RaiseEvent();
+        if(currentLoadedScene.SceneType == SceneType.Location)
+            AfterSceneEvent.RaiseEvent();
     }
 }
